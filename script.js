@@ -2,9 +2,7 @@ const inputBox = document.getElementById("input-box");
 const addButton = document.getElementById("button");
 const ul = document.getElementsByClassName("list-container")[0];
 
-
-
-addButton.addEventListener('click', () => {
+const buttonClick = () => {  
     if (inputBox.value === '') {
         alert("You must write something!");
     } else {
@@ -17,9 +15,9 @@ addButton.addEventListener('click', () => {
     }
     inputBox.value = "";
     saveData();
-});
+}; 
 
-ul.addEventListener('click', (e) => {
+const classCheck = (e) => {
     if (e.target.tagName === "LI") {
         e.target.classList.toggle("checked");
         saveData();
@@ -28,7 +26,7 @@ ul.addEventListener('click', (e) => {
         e.target.parentElement.remove();
         saveData();
     }
-},false);
+}
 
 const saveData = () => {
     localStorage.setItem("data", ul.innerHTML);
@@ -37,4 +35,9 @@ const saveData = () => {
 const showTask = () => {
     ul.innerHTML = localStorage.getItem("data");    
 }
+
+addButton.addEventListener('click', buttonClick);
+
+ul.addEventListener('click', classCheck,false);
+
 showTask();
